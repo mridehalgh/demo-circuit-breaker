@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  demo-service:
+    container_name: demo-service
+    image: stefanprodan/podinfo
+    ports:
+      - "9898:9898"

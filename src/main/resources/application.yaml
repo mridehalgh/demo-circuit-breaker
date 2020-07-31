@@ -1,0 +1,66 @@
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    health:
+      jms:
+        enabled: false
+  export:
+    prometheus:
+      enabled: true
+  server:
+    port: 8081
+
+server:
+  port: 8080
+
+spring:
+  main:
+    banner-mode: 'off'
+  activemq:
+    broker-url: vm://embedded?broker.persistent=false,useShutdownHook=false
+    in-memory: true
+    pool:
+      enabled: true
+      max-connections: 5
+      max-sessions-per-connection: 15
+    packages:
+      trust-all: true
+  jms:
+    listener:
+      acknowledge-mode: auto
+      auto-startup: true
+      concurrency: 5
+      max-concurrency: 10
+    pub-sub-domain: false
+    template:
+      priority: 100
+      qos-enabled: true
+      receive-timeout: 1000
+      time-to-live: 36000
+      delivery-mode: persistent
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+resilience4j.circuitbreaker:
+  instances:
+    backendService:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      minimumNumberOfCalls: 3
+      waitDurationInOpenState: 25s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
