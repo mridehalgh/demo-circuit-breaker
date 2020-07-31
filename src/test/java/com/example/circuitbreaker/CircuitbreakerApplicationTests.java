@@ -9,5 +9,4 @@ class CircuitbreakerApplicationTests {
   @Test
   void contextLoads() {
   }
-
 }

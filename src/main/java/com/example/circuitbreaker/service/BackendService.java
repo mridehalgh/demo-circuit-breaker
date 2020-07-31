@@ -13,7 +13,6 @@ public class BackendService {
 
   @CircuitBreaker(name = BACKEND_SERVICE)
   public void makeRequest() {
-        backendFeignClient.getStatusCode();
+    backendFeignClient.getStatusCode();
   }
-
 }

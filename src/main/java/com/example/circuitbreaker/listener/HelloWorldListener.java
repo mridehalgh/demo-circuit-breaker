@@ -19,10 +19,7 @@ public class HelloWorldListener {
   public static final String HELLO_WORLD_LISTENER = "hello_world_listener";
   private final BackendService backendService;
 
-  @JmsListener(
-      id = HELLO_WORLD_LISTENER,
-      destination = "hello.v1.world",
-      concurrency = "5-10")
+  @JmsListener(id = HELLO_WORLD_LISTENER, destination = "hello.v1.world", concurrency = "5-10")
   @Timed(value = "hello_world_timer")
   public void listenForMessages(
       @Payload final String payload, @Headers final MessageHeaders messageHeaders) {
@@ -32,8 +29,7 @@ public class HelloWorldListener {
             payload, messageHeaders.get(JmsHeaders.REDELIVERED)));
     try {
       backendService.makeRequest();
-    }
-    catch (Exception exc) {
+    } catch (Exception exc) {
       log.error("FailedRequest {}", exc.getMessage());
       throw exc;
     }

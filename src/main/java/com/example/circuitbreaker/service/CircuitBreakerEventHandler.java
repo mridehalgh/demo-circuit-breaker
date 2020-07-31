@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.config.JmsListenerEndpointRegistry;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
-import org.springframework.jms.listener.MessageListenerContainer;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -22,8 +21,8 @@ public class CircuitBreakerEventHandler {
   public void onStateChange(final CircuitBreakerOnStateTransitionEvent event) {
     log.info("Triggered State Change");
     State toState = event.getStateTransition().getToState();
-    DefaultMessageListenerContainer listenerContainer = (DefaultMessageListenerContainer) registry
-        .getListenerContainer(HELLO_WORLD_LISTENER);
+    DefaultMessageListenerContainer listenerContainer =
+        (DefaultMessageListenerContainer) registry.getListenerContainer(HELLO_WORLD_LISTENER);
 
     switch (toState) {
       case OPEN:
