@@ -1,4 +1,6 @@
 # Circuit Breaker JMS Example
+> :warning: This is not production code and should not be treated as such!
+
 
 ## Setting Up
 
